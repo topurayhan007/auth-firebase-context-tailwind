@@ -1,9 +1,26 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthPorviders";
 
 const Header = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const username = user?.email?.split("@")[0];
+  // console.log(username);
+
+  const handleSignOut = () => {
+    logOut()
+      .then(() => {
+        // setUser(null);
+        navigate("/login");
+        navigate(0);
+        // alert("Logged out successfully!");
+      })
+      .catch((error) => {
+        console.log(error.message);
+        alert(error.message);
+      });
+  };
 
   return (
     <div>
@@ -21,17 +38,20 @@ const Header = () => {
           </Link>
         </div>
 
-        {user && (
+        {user ? (
           <div className="ms-auto">
-            <label className=" font-semibold text-lg mr-2">
-              {user.displayName}
-            </label>
+            <label className=" font-semibold text-lg mr-2">{username}</label>
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img src={user.image} />
               </div>
             </label>
+            <label onClick={handleSignOut}>
+              <img className="w-8 h-8" src="icons8-logout-24.png" alt="" />
+            </label>
           </div>
+        ) : (
+          ""
         )}
       </div>
     </div>

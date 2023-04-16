@@ -28,6 +28,8 @@ const Register = () => {
       })
       .catch((error) => {
         console.log(error.message);
+        setLoader(false);
+        alert(error.message);
       });
   };
 

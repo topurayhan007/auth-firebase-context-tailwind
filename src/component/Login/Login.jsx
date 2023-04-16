@@ -1,10 +1,11 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthPorviders";
 
 const Login = () => {
   const { user, signIn, setUser } = useContext(AuthContext);
   const [loader, setLoader] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -23,9 +24,12 @@ const Login = () => {
         form.reset();
         setUser(loggedUser);
         setLoader(false);
+        navigate("/");
       })
       .catch((error) => {
         console.log(error.message);
+        setLoader(false);
+        alert(error.message);
       });
   };
 

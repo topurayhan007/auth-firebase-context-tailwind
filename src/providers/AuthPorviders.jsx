@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  signOut,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
 
@@ -13,6 +14,7 @@ const auth = getAuth(app);
 
 const AuthPorviders = ({ children }) => {
   const [user, setUser] = useState(null);
+
   // const user = { displayName: "Sagor Nodi", image: "/vite.svg" };
 
   const createUser = (email, password) => {
@@ -36,11 +38,16 @@ const AuthPorviders = ({ children }) => {
     };
   }, []);
 
+  const logOut = () => {
+    return signOut(auth);
+  };
+
   const authInfo = {
     user,
     createUser,
     signIn,
     setUser,
+    logOut,
   };
 
   return (
