@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthPorviders";
 
 const Register = () => {
-  const { user } = useContext(AuthContext);
+  const { user, createUser } = useContext(AuthContext);
+  const [loader, setLoader] = useState(false);
 
   const handleRegister = (event) => {
     event.preventDefault();
@@ -14,6 +15,20 @@ const Register = () => {
     const password = form.password.value;
 
     console.log(name, email, password);
+
+    setLoader(true);
+
+    createUser(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+
+        form.reset();
+        setLoader(false);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
   return (
@@ -74,6 +89,12 @@ const Register = () => {
           </div>
         </div>
       </div>
+      {loader && (
+        <div className="absolute top-0 right-0 bottom-0 left-0 m-auto w-20 h-20">
+          {/* <progress className="progress w-56 h-3 progress-accent bg-purple-100"></progress> */}
+          <button className="btn loading w-20 h-20 bg-transparent border-0 text-indigo-500"></button>
+        </div>
+      )}
     </div>
   );
 };
