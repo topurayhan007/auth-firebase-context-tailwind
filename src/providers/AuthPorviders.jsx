@@ -14,6 +14,7 @@ const auth = getAuth(app);
 
 const AuthPorviders = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // const user = { displayName: "Sagor Nodi", image: "/vite.svg" };
 
@@ -30,6 +31,7 @@ const AuthPorviders = ({ children }) => {
       if (currentUser) {
         console.log("auth state change", currentUser);
         setUser(currentUser);
+        setLoading(false);
       }
     });
 
@@ -48,6 +50,7 @@ const AuthPorviders = ({ children }) => {
     signIn,
     setUser,
     logOut,
+    loading,
   };
 
   return (

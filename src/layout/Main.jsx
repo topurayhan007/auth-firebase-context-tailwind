@@ -4,8 +4,8 @@ import Header from "../component/Header/Header";
 
 const Main = () => {
   return (
-    <div className="relative">
-      <Header></Header>
+    <div>
+      <Header className="relative"></Header>
       <Outlet></Outlet>
     </div>
   );

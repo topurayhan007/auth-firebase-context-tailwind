@@ -25,7 +25,9 @@ const Header = () => {
   return (
     <div>
       <div className="navbar bg-primary text-primary-content">
-        <a className="btn btn-ghost normal-case text-xl">AuthMaster</a>
+        <Link to="/" className="btn btn-ghost normal-case text-xl">
+          AuthMaster
+        </Link>
         <div className="ms-auto">
           <Link className="btn btn-ghost normal-case text-lg" to="/">
             Home
@@ -36,6 +38,14 @@ const Header = () => {
           <Link className="btn btn-ghost normal-case text-lg" to="/register">
             Register
           </Link>
+          <Link className="btn btn-ghost normal-case text-lg" to="/orders">
+            Orders
+          </Link>
+          {user && (
+            <Link className="btn btn-ghost normal-case text-lg" to="/profile">
+              Profile
+            </Link>
+          )}
         </div>
 
         {user ? (

@@ -25,6 +25,7 @@ const Login = () => {
         setUser(loggedUser);
         setLoader(false);
         navigate("/");
+        // navigate(0);
       })
       .catch((error) => {
         console.log(error.message);
