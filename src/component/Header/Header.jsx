@@ -29,22 +29,34 @@ const Header = () => {
           AuthMaster
         </Link>
         <div className="ms-auto">
-          <Link className="btn btn-ghost normal-case text-lg" to="/">
-            Home
-          </Link>
-          <Link className="btn btn-ghost normal-case text-lg" to="/login">
-            Login
-          </Link>
-          <Link className="btn btn-ghost normal-case text-lg" to="/register">
-            Register
-          </Link>
-          <Link className="btn btn-ghost normal-case text-lg" to="/orders">
-            Orders
-          </Link>
           {user && (
-            <Link className="btn btn-ghost normal-case text-lg" to="/profile">
-              Profile
+            <Link className="btn btn-ghost normal-case text-lg" to="/">
+              Home
             </Link>
+          )}
+          {!user && (
+            <>
+              <Link className="btn btn-ghost normal-case text-lg" to="/login">
+                Login
+              </Link>
+              <Link
+                className="btn btn-ghost normal-case text-lg"
+                to="/register"
+              >
+                Register
+              </Link>
+            </>
+          )}
+
+          {user && (
+            <>
+              <Link className="btn btn-ghost normal-case text-lg" to="/orders">
+                Orders
+              </Link>
+              <Link className="btn btn-ghost normal-case text-lg" to="/profile">
+                Profile
+              </Link>
+            </>
           )}
         </div>
 
