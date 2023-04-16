@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthPorviders";
 
 const Login = () => {
-  const { user, signIn, setUser } = useContext(AuthContext);
+  const { user, signIn, setUser, signInWithGoogle } = useContext(AuthContext);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
 
@@ -31,6 +31,18 @@ const Login = () => {
         console.log(error.message);
         setLoader(false);
         alert(error.message);
+      });
+  };
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error.message);
       });
   };
 
@@ -71,7 +83,10 @@ const Login = () => {
                 </a>
               </label>
             </div>
-            <div className="form-control mt-6">
+            <div onClick={handleGoogleSignIn} className="flex justify-center">
+              <img className="w-8 h-8 " src="icons8-google-48.png" alt="" />
+            </div>
+            <div className="form-control mt-4">
               <button className="btn btn-primary">Login</button>
             </div>
           </form>
